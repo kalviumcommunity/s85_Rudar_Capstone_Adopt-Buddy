@@ -1,15 +1,18 @@
 const express = require('express');
-const userRouter = require('./Routes/usersapi')
+const dotenv = require('dotenv');
+const db = require('./DataBase/DB.js');
+
+dotenv.config({ path: './config/.env' });
 
 const app = express();
 app.use(express.json());
-const port = 5000;
+
+const port = process.env.PORT || 5000;
+
+
 app.get('/',(req,res)=>{
     res.send(`Hello is my server, running on : http://localhost:${port}`);
 })
-
-app.use('/api/user',userRouter);
-
 
 app.listen(port, ()=>{
     console.log(`Server is running on : http://localhost:${port}`);
