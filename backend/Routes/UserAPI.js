@@ -70,4 +70,37 @@ router.get('/users/:id', async (req, res) => {
   }
 });
 
+// Update user by ID
+router.put('/users/:id', upload.single('profileImage'), async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updateData = { ...req.body };
+
+    // If a new profile image is uploaded
+    if (req.file) {
+      updateData.profileImage = req.file.path;
+    }
+
+    // If password is being updated, hash it
+    if (updateData.password) {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    console.error('Error updating user:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;
