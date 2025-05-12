@@ -1,6 +1,5 @@
 # Adopt Buddy
 
-## Backend LIVE Link: https://s85-rudar-capstone-adopt-buddy.onrender.com/
 Welcome to **Adopt Buddy**, a web application that connects pet adopters with shelters and pet owners to find their perfect companion. 
 
 ## Features
