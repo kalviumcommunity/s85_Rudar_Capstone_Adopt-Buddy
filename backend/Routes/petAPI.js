@@ -70,4 +70,31 @@ router.get('/pets/:id', async (req, res) => {
     }
 });
 
+// Route to update pet details by ID (including image update)
+router.put('/pets/:id', upload.single('image'), async (req, res) => {
+    try {
+        const petId = req.params.id;
+        const updateData = req.body;
+
+        if (req.file) {
+            updateData.image = req.file.path; // Update image path if a new image is uploaded
+        }
+
+        const updatedPet = await Pet.findByIdAndUpdate(
+            petId,
+            updateData,
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedPet) {
+            return res.status(404).json({ error: 'Pet not found' });
+        }
+
+        res.status(200).json(updatedPet);
+    } catch (error) {
+        console.error('Error updating pet:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 module.exports = router;
