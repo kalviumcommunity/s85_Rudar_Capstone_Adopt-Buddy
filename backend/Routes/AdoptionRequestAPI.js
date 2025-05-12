@@ -49,4 +49,27 @@ router.get('/requests/:id', async (req, res) => {
     }
 });
 
+// Update adoption request by ID
+router.put('/requests/:id', async (req, res) => {
+    try {
+        const updatedData = req.body;
+        const requestId = req.params.id;
+
+        const updatedRequest = await AdoptionRequest.findByIdAndUpdate(
+            requestId,
+            updatedData,
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedRequest) {
+            return res.status(404).json({ error: 'Request not found' });
+        }
+
+        res.status(200).json(updatedRequest);
+    } catch (err) {
+        console.error('Error updating request:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 module.exports = router;

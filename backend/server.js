@@ -10,7 +10,7 @@ app.use(express.json());
 const port = process.env.PORT || 5000;
 
 // Connect to Database
-db(); // Make sure this function connects to MongoDB properly
+// db(); // Make sure this function connects to MongoDB properly
 
 // Routes
 const UserAPI = require('./Routes/UserAPI');

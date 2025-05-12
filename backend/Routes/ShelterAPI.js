@@ -66,4 +66,31 @@ router.get('/shelters/:id', async (req, res) => {
     }
 });
 
+// Route to update shelter details by ID (including image update)
+router.put('/shelters/:id', upload.single('shelterImage'), async (req, res) => {
+    try {
+        const shelterId = req.params.id;
+        const updateData = req.body;
+
+        if (req.file) {
+            updateData.shelterImage = req.file.path; // Update image if a new one is uploaded
+        }
+
+        const updatedShelter = await Shelter.findByIdAndUpdate(
+            shelterId,
+            updateData,
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedShelter) {
+            return res.status(404).json({ error: 'Shelter not found' });
+        }
+
+        res.status(200).json(updatedShelter);
+    } catch (error) {
+        console.error('Error updating shelter:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 module.exports = router;
