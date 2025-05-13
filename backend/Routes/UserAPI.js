@@ -19,6 +19,47 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage });
 
 /**
+ * @route   POST /api/user/login
+ * @desc    ✅ LOGIN Operation: Authenticate a user
+ * @access  Public
+ */
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // ✅ Check if email exists in the database
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid credentials' });  // If user not found
+    }
+
+    // ✅ Compare the hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Invalid credentials' });  // If password doesn't match
+    }
+
+    // ✅ Successfully authenticated
+    // Here, instead of JWT, you can set a session if needed.
+    // For now, we'll return the user info (without password).
+    res.status(200).json({
+      message: 'Login successful',
+      user: {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        role: user.role
+      },
+    });
+
+  } catch (err) {
+    console.error('Error logging in:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+/**
  * @route   POST /api/user/sign-up
  * @desc    ✅ WRITE Operation: Register a new user with profile image and hashed password
  * @access  Public
