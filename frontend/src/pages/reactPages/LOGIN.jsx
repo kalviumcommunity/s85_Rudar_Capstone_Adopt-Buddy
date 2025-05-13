@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../pagesStyleSheet/Login.css';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    email: '',
+    identifier: '',
     password: '',
   });
 
@@ -23,18 +26,21 @@ const Login = () => {
 
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', formData);
+      setLoading(false);
+      alert('Login Successful!');
 
-      if (response.status === 200) {
-        setLoading(false);
-        alert('Login Successful!');
-        // Redirect or handle successful login
-      } else {
-        setErrorMessage('Login Failed. Please check your credentials.');
-        setLoading(false);
-      }
+      // ✅ Save user to localStorage
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      // ✅ Redirect to home
+      navigate('/home');
     } catch (error) {
       setLoading(false);
-      setErrorMessage('Login Failed. Invalid credentials or server error.');
+      if (error.response?.data?.error) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage('Login Failed. Try again.');
+      }
       console.error('Error:', error);
     }
   };
@@ -45,12 +51,13 @@ const Login = () => {
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
+            <label>Username or Email</label>
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type="text"
+              name="identifier"
+              value={formData.identifier}
               onChange={handleChange}
+              placeholder="Enter username or email"
               required
             />
           </div>
@@ -61,6 +68,7 @@ const Login = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              placeholder="Enter your password"
               required
             />
           </div>

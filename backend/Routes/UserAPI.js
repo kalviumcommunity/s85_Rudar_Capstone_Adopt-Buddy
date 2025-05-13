@@ -24,24 +24,31 @@ const upload = multer({ storage });
  * @access  Public
  */
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { identifier, password } = req.body;
 
   try {
-    // ✅ Check if email exists in the database
-    const user = await User.findOne({ email });
+    // Determine whether identifier is an email or username
+    const isEmail = identifier.includes('@');
+
+    // Find user by email or username
+    const user = await User.findOne(
+      isEmail ? { email: identifier } : { username: identifier }
+    );
+
+    // No user found
     if (!user) {
-      return res.status(400).json({ error: 'Invalid credentials' });  // If user not found
+      return res.status(400).json({
+        error: isEmail ? 'Invalid email' : 'Invalid username',
+      });
     }
 
-    // ✅ Compare the hashed password
+    // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ error: 'Invalid credentials' });  // If password doesn't match
+      return res.status(400).json({ error: 'Invalid password' });
     }
 
-    // ✅ Successfully authenticated
-    // Here, instead of JWT, you can set a session if needed.
-    // For now, we'll return the user info (without password).
+    // Success
     res.status(200).json({
       message: 'Login successful',
       user: {
@@ -49,12 +56,12 @@ router.post('/login', async (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        role: user.role
+        username: user.username,
+        role: user.role,
       },
     });
-
-  } catch (err) {
-    console.error('Error logging in:', err);
+  } catch (error) {
+    console.error('Login error:', error);
     res.status(500).json({ error: 'Server error' });
   }
 });
