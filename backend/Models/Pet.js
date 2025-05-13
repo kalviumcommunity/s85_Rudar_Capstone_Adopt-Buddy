@@ -8,9 +8,17 @@ const petSchema = new mongoose.Schema({
   gender: { type: String, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
-  shelter: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },  
+
+  // Relationship: shelter is a reference to a User document (the shelter who posted the pet)
+  shelter: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User', 
+    required: true 
+  },  
+
   isAdopted: { type: Boolean, default: false },
   postedAt: { type: Date, default: Date.now }
 });
 
+// Exporting the Pet model
 module.exports = mongoose.model('Pet', petSchema);
