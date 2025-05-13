@@ -1,9 +1,24 @@
 const mongoose = require('mongoose');
 
 const adoptionRequestSchema = new mongoose.Schema({
-  adopter: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, 
-  pet: { type: mongoose.Schema.Types.ObjectId, ref: 'Pet', required: true }, 
-  shelter: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, 
+  // Relationship: adopter is a reference to a User document
+  adopter: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User', 
+    required: true 
+  }, 
+  // Relationship: pet is a reference to a Pet document
+  pet: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Pet', 
+    required: true 
+  }, 
+  // Relationship: shelter is also a reference to a User document (with role 'shelter')
+  shelter: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User', 
+    required: true 
+  }, 
   status: { 
     type: String, 
     enum: ['pending', 'approved', 'rejected'], 

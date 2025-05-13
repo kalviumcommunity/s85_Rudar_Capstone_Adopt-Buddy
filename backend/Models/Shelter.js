@@ -8,10 +8,13 @@ const shelterSchema = new mongoose.Schema({
   description: { type: String },
   website: { type: String },
   shelterImage: { type: String },  
+
+  // Relationship: Array of references to User documents representing staff members
   staffMembers: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
   ],
 
+  // Relationship: Array of references to Pet documents representing available pets
   petsAvailable: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'Pet' }
   ],
@@ -22,4 +25,5 @@ const shelterSchema = new mongoose.Schema({
   }
 });
 
+// Exporting the Shelter model
 module.exports = mongoose.model('Shelter', shelterSchema);
