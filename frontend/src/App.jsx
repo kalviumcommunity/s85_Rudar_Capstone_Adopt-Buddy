@@ -1,26 +1,34 @@
-import React from 'react'
-import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import LandingPage from './pages/reactPages/LANDING.jsx'
-import SignUp from './pages/reactPages/SIGNUP.jsx'
-import Login from './pages/reactPages/LOGIN.jsx'
-import Home from './pages/reactPages/HOME.jsx'
+import React from 'react';
+import './App.css';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import LandingPage from './pages/reactPages/LANDING.jsx';
+import SignUp from './pages/reactPages/SIGNUP.jsx';
+import Login from './pages/reactPages/LOGIN.jsx';
+import Home from './pages/reactPages/HOME.jsx';
+
+// ✅ Custom component to protect private routes
+const PrivateRoute = ({ children }) => {
+  const isAuthenticated = localStorage.getItem('user');
+  return isAuthenticated ? children : <Navigate to="/" />;
+};
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<LandingPage />} />
-      <Route path='/home' element={<Home />} />
-      <Route path='/sign-up' element={<SignUp />} />
-      <Route path='/login' element={<Login />} />
-    </Routes>
-  </BrowserRouter>
-  )
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/login' element={<Login />} />
+
+        {/* ✅ Protected Home Route */}
+        <Route path='/home' element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        } />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-// I use Commend "npm run build" to get dist folder and I add that folder to .gitionre 
-
-// That's it for this assignment 
-
-export default App
+export default App;
