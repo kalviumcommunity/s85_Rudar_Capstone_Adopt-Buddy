@@ -1,0 +1,32 @@
+/* Base reset and font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Background image and fade */
+body {
+  min-height: 200vh;
+  background-image: url('./assets/mainImage.jpg'); /* ✅ Adjust if path changes */
+  background-size: cover;
+  background-position: center 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* 🔒 This makes it static */
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: overlay for fade effect */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  background-color: rgba(0, 0, 0,0.3); /* 🤍 Light fade overlay */
+  backdrop-filter: blur(5px);
+  z-index: -1;
+}
