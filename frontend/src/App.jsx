@@ -19,4 +19,8 @@ function App() {
   )
 }
 
+// I use Commend "npm run build" to get dist folder and I add that folder to .gitionre 
+
+// That's it for this assignment 
+
 export default App
