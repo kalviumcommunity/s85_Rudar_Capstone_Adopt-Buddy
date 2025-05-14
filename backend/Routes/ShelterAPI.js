@@ -110,5 +110,24 @@ router.put('/shelters/:id', upload.single('shelterImage'), async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
+/**
+ * @route   DELETE /api/shelter/shelters/:id
+ * @desc    ❌ DELETE Operation: Delete shelter by ID
+ * @access  Public (⚠️ Recommend protecting this in the future)
+ */
+router.delete('/shelters/:id', async (req, res) => {
+    try {
+        const deletedShelter = await Shelter.findByIdAndDelete(req.params.id);
+
+        if (!deletedShelter) {
+            return res.status(404).json({ error: 'Shelter not found' });
+        }
+
+        res.status(200).json({ message: 'Shelter deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting shelter:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 module.exports = router;

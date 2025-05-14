@@ -114,4 +114,24 @@ router.put('/pets/:id', upload.single('image'), async (req, res) => {
     }
 });
 
+/**
+ * @route   DELETE /api/pet/pets/:id
+ * @desc    ❌ DELETE Operation: Delete pet profile by ID
+ * @access  Public (⚠️ Recommend protecting this in the future)
+ */
+router.delete('/pets/:id', async (req, res) => {
+    try {
+        const deletedPet = await Pet.findByIdAndDelete(req.params.id);
+
+        if (!deletedPet) {
+            return res.status(404).json({ error: 'Pet not found' });
+        }
+
+        res.status(200).json({ message: 'Pet profile deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting pet:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 module.exports = router;
