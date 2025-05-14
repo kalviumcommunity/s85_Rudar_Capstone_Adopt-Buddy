@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Profile Page Styles */
+#profile-page {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #edf6fb; /* Soft blue background */
+  animation: fadeIn 1s ease-in-out;
+}
+
+#profile-page .profile-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(60, 100, 130, 0.1);
+  width: 100%;
+  max-width: 500px;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#profile-page .profile-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #18597e; /* Calm blue for heading */
+  font-weight: bold;
+}
+
+#profile-page .profile-container .user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+#profile-page .profile-container .user-info p {
+  font-size: 1rem;
+  color: #333;
+}
+
+#profile-page .profile-container .user-info img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1.2rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease;
+}
+
+#profile-page .profile-container .user-info img:hover {
+  transform: scale(1.1);
+}
+
+#profile-page .profile-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-page .profile-container form div {
+  margin-bottom: 1rem;
+}
+
+#profile-page .profile-container form label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  color: #18597e; /* Calm blue for labels */
+}
+
+#profile-page .profile-container form input,
+#profile-page .profile-container form select,
+#profile-page .profile-container form textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+#profile-page .profile-container form input:focus,
+#profile-page .profile-container form select:focus,
+#profile-page .profile-container form textarea:focus {
+  border-color: #3b9ecb; /* Calm blue on focus */
+  outline: none;
+}
+
+#profile-page .profile-container form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#profile-page .profile-container form button {
+  padding: 1rem;
+  border: none;
+  background-color: #3b9ecb; /* Calm blue */
+  color: white;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s ease-in-out;
+}
+
+#profile-page .profile-container form button:hover {
+  background-color: #58b7e0;
+  transform: translateY(-3px);
+}
+
+#profile-page .profile-container form button:active {
+  transform: translateY(1px);
+}
+
+#profile-page .profile-container form .error-message {
+  color: red;
+  font-size: 0.9rem;
+}
+
+#profile-page .profile-container .user-info button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s ease-in-out;
+}
+
+#profile-page .profile-container .user-info button:hover {
+  background-color: #e63e3e;
+  transform: translateY(-3px);
+}
+
+#profile-page .profile-container .user-info button:active {
+  transform: translateY(1px);
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.label {
+  width: 120px; /* Adjust width as needed */
+  font-weight: bold;
+}
+
+.value {
+  flex: 1;
+  word-break: break-word;
+}
+
+.profile-img {
+  max-width: 150px;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.button-row {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
