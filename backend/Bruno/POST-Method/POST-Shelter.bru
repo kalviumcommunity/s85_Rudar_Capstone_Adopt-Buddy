@@ -1,0 +1,24 @@
+meta {
+  name: POST-Shelter
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:5000/api/shelter/addshelter
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  name: Pet Shop
+  address: Ratia, Fatehabad, Haryana, India
+  phone: 9466376221
+  email: rudagmail.comrmonga@
+  description: We also rent pet
+  website: http://localhost:5000
+  staffMembers: 68242873a09ed44e1dc46119
+  petsAvailable: 682429e4a09ed44e1dc4611b
+  petsAvailable: 68242a6ba09ed44e1dc4611f
+  shelterImage: @file(C:\Users\WMG\OneDrive\Pictures\133906422621007785.jpg)
+}

@@ -1,0 +1,21 @@
+meta {
+  name: POST-Adoption-Request
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:5000/api/request/newRequest
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "adopter": "68242a1da09ed44e1dc4611d",
+    "pet": "682429e4a09ed44e1dc4611b",
+    "shelter":"68242873a09ed44e1dc46119",
+    "status":"approved",
+    "message": "Take care"
+  }
+}

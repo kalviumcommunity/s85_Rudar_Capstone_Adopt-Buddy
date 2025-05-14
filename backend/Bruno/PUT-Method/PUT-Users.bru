@@ -1,0 +1,17 @@
+meta {
+  name: PUT-Users
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:5000/api/users/users/68242873a09ed44e1dc46119
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "firstName": "Shaurya"
+  }
+}
