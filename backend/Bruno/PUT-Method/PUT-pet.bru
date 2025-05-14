@@ -1,0 +1,17 @@
+meta {
+  name: PUT-pet
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:5000/api/pet/pets/682429e4a09ed44e1dc4611b
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name" : "yuki"
+  }
+}

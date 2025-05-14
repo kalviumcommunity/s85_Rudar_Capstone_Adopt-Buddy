@@ -1,0 +1,17 @@
+meta {
+  name: PUT-Shelter
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:5000/api/shelter/shelters/68242c24a09ed44e1dc46121
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"THE PET SHOP"
+  }
+}

@@ -1,0 +1,22 @@
+meta {
+  name: POST-Pet
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:5000/api/pet/addpet
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  name: Coco
+  age: 3
+  species: Dog
+  breed: NA
+  gender: Female
+  description: NA
+  shelter: 68242873a09ed44e1dc46119
+  image: @file(C:\Users\WMG\OneDrive\Pictures\133913702261460722.jpg)
+}

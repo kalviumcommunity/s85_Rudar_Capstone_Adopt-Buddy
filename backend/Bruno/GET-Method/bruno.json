@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "GET-Method",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
