@@ -169,4 +169,23 @@ router.put('/users/:id', upload.single('profileImage'), async (req, res) => {
   }
 });
 
+/**
+ * @route   DELETE /api/user/users/:id
+ * @desc    ❌ DELETE Operation: Delete user by ID
+ * @access  Public (⚠️ Recommend protecting this later)
+ */
+router.delete('/users/:id', async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (!deletedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting user:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;

@@ -96,4 +96,24 @@ router.put('/requests/:id', async (req, res) => {
     }
 });
 
+/**
+ * @route   DELETE /api/request/requests/:id
+ * @desc    ❌ DELETE Operation: Delete an adoption request by ID
+ * @access  Public (⚠️ Should be protected in real-world apps)
+ */
+router.delete('/requests/:id', async (req, res) => {
+    try {
+        const deletedRequest = await AdoptionRequest.findByIdAndDelete(req.params.id);
+
+        if (!deletedRequest) {
+            return res.status(404).json({ error: 'Request not found' });
+        }
+
+        res.status(200).json({ message: 'Adoption request deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting request:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 module.exports = router;
