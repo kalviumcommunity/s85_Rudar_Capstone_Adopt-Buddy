@@ -1,4 +1,5 @@
 # Adopt Buddy - Pet Adoption Platform
+## Deployed Link: https://s85-rudar-capstone-adopt-buddy-1.onrender.com/
 
 Adopt Buddy is a full-stack MERN application designed to connect loving homes with pets in need. It provides a platform for shelters to post adoptable pets and for adopters to browse, apply, and chat with shelters in real-time.
 
