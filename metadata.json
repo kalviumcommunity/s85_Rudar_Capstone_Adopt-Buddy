@@ -1,0 +1,5 @@
+{
+  "name": "Adopt Buddy",
+  "description": "A production-ready Pet Adoption Platform where shelters can post pets and adopters can find their new best friends. Features real-time chat, secure authentication, and a comprehensive adoption request system.",
+  "requestFramePermissions": []
+}
